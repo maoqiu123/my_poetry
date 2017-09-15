@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Article;
+use Symfony\Component\HttpKernel\EventListener\AddRequestFormatsListener;
 
 
 class ArticleController extends Controller
@@ -163,6 +164,22 @@ class ArticleController extends Controller
             $msg = $add -> More($data);
             return $msg;
         }
+    }
+
+    public function SiteMovition()
+    {
+        $Article = new Article();
+        $data['data'] = $Article -> SiteMov();
+        $data['first_content'] = mb_substr($data['data'][0]['content'], 0, 18, 'utf-8');
+        return response() -> json(['code' => 0, 'data'=>$data]);
+    }
+
+    public function NewsExpress()
+    {
+        $Article = new Article();
+        $data['data'] = $Article -> NewExpress();
+        $data['first_content'] = mb_substr($data['data'][0]['content'], 0, 18, 'utf-8');
+        return response() -> json(['code' => 0, 'data' => $data]);
     }
 
 

@@ -28,6 +28,8 @@ class CarouselController extends Controller
     }
 
     public function show(){
+
+
         $carousel = new Carousel;
         return $carousel->show();
     }
