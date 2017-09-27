@@ -209,6 +209,14 @@ portrait(string) | 传入用户头像  | C:\xampp\tmp\phpC6D5.tmp
 
 发送失败无返回
 
+密码为空返回
+ ```json
+{
+    "code": 1,
+    "msg": "请输入密码"
+}
+ ```
+
 #### 重置密码
 
  > http://www.thmaoqiu.cn/poetry/public/index.php/forgot/password

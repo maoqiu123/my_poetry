@@ -33,6 +33,7 @@ class ForgotPasswordController extends Controller
         if (!$user = User::where('email',$email)->first()){
             return json_encode(['code'=>2,'msg'=>'邮箱不存在']);
         }
+        
         $user->password = $request->newpassword;
         if ($user->save()) {
             return json_encode(['code' => 0, 'msg' => '修改密码成功']);
