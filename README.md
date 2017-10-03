@@ -209,14 +209,6 @@ portrait(string) | 传入用户头像  | C:\xampp\tmp\phpC6D5.tmp
 
 发送失败无返回
 
-密码为空返回
- ```json
-{
-    "code": 1,
-    "msg": "请输入密码"
-}
- ```
-
 #### 重置密码
 
  > http://www.thmaoqiu.cn/poetry/public/index.php/forgot/password
@@ -245,12 +237,7 @@ portrait(string) | 传入用户头像  | C:\xampp\tmp\phpC6D5.tmp
     "msg": "修改密码失败，请稍后再试"
 }
  ```
- ```json
-{
-    "code": 2,
-    "msg": "邮箱不存在"
-}
- ```
+
   
 ## 轮播图
 
@@ -649,6 +636,7 @@ id(int) | 传入id  | 3
 ```
 
  
+
 
 ## 栏目
 
@@ -1346,4 +1334,234 @@ list_id(int) | 栏目id | 1
     "code": 2,
     "msg": "该栏目暂未发表文章”
 }
+```
+
+
+
+## 评论
+
+
+
+### 添加评论
+
+> http://www.thmaoqiu.cn/poetry/public/index.php/addcomment
+
+数据传输方式：GET
+
+数据传输格式为：JSON
+
+
+参数(类型) | 说明 | 示例
+----|------|----
+comment(string) | 评论  | hello
+uid(string) | 父评论id | 0（无父评论）
+article_id(string) |  文章id | 1 
+user_id(int) | 用户id | 1
+
+验证成功返回 
+ ```json
+{
+    "code": 0,
+    "msg": "评论成功",
+    "id": 8
+}
  ```
+
+验证失败返回
+ ```json
+{
+    "code": 1,
+    "msg": "评论 为必填项"
+}
+{
+    "code": 1,
+    "msg": "父评论id 为必填"
+}
+{
+    "code": 1,
+    "msg": "文章id 为必填项"
+}
+{
+    "code": 1,
+    "msg": "用户id 为必填项"}
+{
+    "code": 2,
+    "msg": "评论失败，请重试”}
+ ```
+
+### 查询评论
+
+> http://www.thmaoqiu.cn/poetry/public/index.php/showcomment
+
+数据传输方式：GET
+
+数据传输格式为：JSON
+
+
+参数(类型) | 说明 | 示例
+----|------|----
+article_id(string) |  文章id | 1 
+
+验证成功返回 
+ ```json
+{
+    "code": 0,
+    "msg": [
+        {
+            "user_name": "匿名用户",
+            "comment": "haha",
+            "created_at": "2031-04-21 19:04",
+            "id": 19
+        },
+        {
+            "user_name": "xxx",
+            "comment": "hello",
+            "created_at": "2017-08-24 17:08",
+            "id": 18
+        },{
+            "user_name": "匿名用户",
+            "comment": "哈哈哈",
+            "created_at": "2005-03-18 01:03",
+            "id": 1,
+            "childComment": [
+                {
+                    "comment": "44444",
+                    "id": 4,
+                    "created_at": "2005-03-06 11:03"
+                },
+                {
+                    "user_name": "xxx",
+                    "comment": "55555",
+                    "id": 5,
+                    "created_at": "1971-05-10 11:05"
+                }
+            ]
+      }
+    ]
+}
+ ```
+
+验证失败返回
+ ```json
+{
+    "code": 1,
+    "msg": "文章id 为必填项"
+}
+{
+    "code": 2,
+    "msg": "暂无评论”
+}
+ ```
+
+### 更多评论
+
+> http://www.thmaoqiu.cn/poetry/public/index.php/morecomment
+
+数据传输方式：GET
+
+数据传输格式为：JSON
+
+
+参数(类型) | 说明 | 示例
+----|------|----
+uid(string) |  父评论id | 1 
+
+验证成功返回 
+ ```json
+{
+    "code": 0,
+    "msg": [
+        {
+            "comment": "44444",
+            "id": 4
+        },
+        {
+            "comment": "55555",
+            "id": 5
+        }
+    ]
+}
+ ```
+
+验证失败返回
+ ```json
+{
+    "code": 1,
+    "msg": "父评论d 为必填项"
+    "username" : "xxx"
+}
+{
+    "code": 2,
+    "msg": "操作失败，请重试”
+     "username" : "xxx"
+}
+ ```
+
+ ###本站动态
+ >http://www.thmaoqiu.cn/poetry/public/index.php/sitemov
+ 
+数据传输方式：GET
+
+数据传输格式为：JSON
+
+参数(类型) | 说明 | 示例
+----|------|----
+
+
+展示成功返回
+```
+{
+    "code": 0,
+    "data": [
+        {
+            "id": 3,
+            "author": "作者三",
+            "title": "标题三",
+            "content": "文章三",
+            "pic": "/pic3",
+            "source": "企鹅",
+            "list_id": "3",
+            "created_at": "2009-06-18 10:38:41"
+        }
+    ]
+}
+```
+
+展示失败返回
+`{'code'=>1,'msg'=>'查询失败，请稍后再试'}`
+
+ ###新闻速递
+ >http://www.thmaoqiu.cn/poetry/public/index.php/newsexp
+ 
+数据传输方式：GET
+
+数据传输格式为：JSON
+
+参数(类型) | 说明 | 示例
+----|------|----
+
+
+展示成功返回
+```
+{
+    "code": 0,
+    "data": [
+        {
+            "id": 3,
+            "author": "作者三",
+            "title": "标题三",
+            "content": "文章三",
+            "pic": "/pic3",
+            "source": "企鹅",
+            "list_id": "3",
+            "created_at": "2009-06-18 10:38:41"
+        }
+    ]
+}
+```
+
+展示失败返回
+`{'code'=>1,'msg'=>'查询失败，请稍后再试'}`
+
+
+ 
